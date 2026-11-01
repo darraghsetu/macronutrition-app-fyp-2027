@@ -1,6 +1,9 @@
 -- TODO:
 -- Add pgvector vectors 
 -- Add indexes
+-- Add constraint checks
+-- Add ON DELETE clauses
+-- Add views?
 
 -- User tables
 
@@ -35,7 +38,7 @@ CREATE TABLE user_dietary_restrictions (
 
 CREATE TABLE ingredient_categories (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name VARCHAR(50) UNIQUE NOT NULL -- 'protein', 'vegetable', ...
+  name VARCHAR(50) UNIQUE NOT NULL -- 'protein', 'vegetable', etc.
 );
 
 CREATE TABLE ingredients (
@@ -46,7 +49,7 @@ CREATE TABLE ingredients (
   carbs_per_100g NUMERIC NOT NULL,
   fat_per_100g NUMERIC NOT NULL,
   kcal_per_100g NUMERIC NOT NULL,
-  is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  is_active BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 -- Row present = ingredient complies with the restriction
@@ -67,4 +70,57 @@ CREATE TABLE recipes (
 CREATE TABLE meal_categories (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   name VARCHAR(50) UNIQUE NOT NULL -- 'Breakfast', 'Lunch', 'Dinner', 'Snack'
+);
+
+CREATE TABLE recipe_categories (
+    recipe_id INT NOT NULL REFERENCES recipes(id),
+    category_id INT NOT NULL REFERENCES meal_categories(id),
+    PRIMARY KEY (recipe_id, category_id)
+);
+
+CREATE TABLE recipe_slots (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    recipe_id INT NOT NULL REFERENCES recipes(id),
+    slot_name VARCHAR(100) NOT NULL,
+    min_selections INT NOT NULL,
+    max_selections INT NOT NULL
+);
+
+CREATE TABLE slot_options (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    slot_id INT NOT NULL REFERENCES recipe_slots(id),
+    ingredient_id INT NOT NULL REFERENCES ingredients(id),
+    default_grams NUMERIC NOT NULL,
+    is_default BOOLEAN NOT NULL,
+    min_multiplier NUMERIC NOT NULL,
+    max_multiplier NUMERIC NOT NULL
+);
+
+-- Solver output tables
+
+CREATE TABLE user_meal_plans (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    user_id INT NOT NULL REFERENCES users(id),
+    plan_date DATE NOT NULL,
+    solver_status TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT now()
+);
+
+CREATE TABLE meal_plan_items (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    meal_plan_id INT NOT NULL REFERENCES user_meal_plans(id),
+    recipe_id INT NOT NULL REFERENCES recipes(id),
+    meal_category_id INT NOT NULL REFERENCES meal_categories(id),
+    final_calories NUMERIC NOT NULL,
+    final_protein NUMERIC NOT NULL,
+    final_carbs NUMERIC NOT NULL,
+    final_fat NUMERIC NOT NULL,
+    FOREIGN KEY (recipe_id, meal_category_id) REFERENCES recipe_categories(recipe_id, category_id)
+);
+
+CREATE TABLE meal_plan_item_ingredients (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    meal_plan_item_id INT NOT NULL REFERENCES meal_plan_items(id),
+    slot_option_id INT NOT NULL REFERENCES slot_options(id),
+    grams NUMERIC NOT NULL,
 );
