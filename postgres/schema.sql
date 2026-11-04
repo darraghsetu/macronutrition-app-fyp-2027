@@ -1,6 +1,5 @@
 -- TODO:
 -- Add pgvector vectors 
--- Add indexes
 -- Add constraint checks
 -- Add ON DELETE clauses
 -- Add views?
@@ -33,6 +32,7 @@ CREATE TABLE user_dietary_restrictions (
   restriction_id INT NOT NULL REFERENCES dietary_restrictions(id),
   PRIMARY KEY (user_id, restriction_id)
 );
+CREATE INDEX ON user_dietary_restrictions(restriction_id);
 
 -- Ingredients tables
 
@@ -51,6 +51,7 @@ CREATE TABLE ingredients (
   kcal_per_100g NUMERIC NOT NULL,
   is_active BOOLEAN NOT NULL DEFAULT TRUE
 );
+CREATE INDEX ON ingredients(category_id);
 
 -- Row present = ingredient complies with the restriction
 CREATE TABLE ingredient_dietary_restrictions (
@@ -58,13 +59,14 @@ CREATE TABLE ingredient_dietary_restrictions (
   restriction_id INT NOT NULL REFERENCES dietary_restrictions(id),
   PRIMARY KEY (ingredient_id, restriction_id)
 );
+CREATE INDEX ON ingredient_dietary_restrictions(restriction_id);
 
 -- Recipes tables
 
 CREATE TABLE recipes (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   title_template VARCHAR(255) NOT NULL,
-  is_active BOOLEAN NOT NULL
+  is_active BOOLEAN NOT NULL DEFAULT TRUE
 );
 
 CREATE TABLE meal_categories (
@@ -77,6 +79,7 @@ CREATE TABLE recipe_categories (
     category_id INT NOT NULL REFERENCES meal_categories(id),
     PRIMARY KEY (recipe_id, category_id)
 );
+CREATE INDEX ON recipe_categories(category_id);
 
 CREATE TABLE recipe_slots (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -91,10 +94,11 @@ CREATE TABLE slot_options (
     slot_id INT NOT NULL REFERENCES recipe_slots(id),
     ingredient_id INT NOT NULL REFERENCES ingredients(id),
     default_grams NUMERIC NOT NULL,
-    is_default BOOLEAN NOT NULL,
+    is_default BOOLEAN NOT NULL DEFAULT FALSE,
     min_multiplier NUMERIC NOT NULL,
     max_multiplier NUMERIC NOT NULL
 );
+CREATE INDEX ON slot_options(ingredient_id);
 
 -- Solver output tables
 
@@ -117,6 +121,8 @@ CREATE TABLE meal_plan_items (
     final_fat NUMERIC NOT NULL,
     FOREIGN KEY (recipe_id, meal_category_id) REFERENCES recipe_categories(recipe_id, category_id)
 );
+CREATE INDEX ON meal_plan_items(meal_plan_id);
+CREATE INDEX ON meal_plan_items(recipe_id);
 
 CREATE TABLE meal_plan_item_ingredients (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -124,3 +130,4 @@ CREATE TABLE meal_plan_item_ingredients (
     slot_option_id INT NOT NULL REFERENCES slot_options(id),
     grams NUMERIC NOT NULL,
 );
+CREATE INDEX ON meal_plan_item_ingredients(slot_option_id);
