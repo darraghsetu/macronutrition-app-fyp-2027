@@ -1,3 +1,4 @@
+CREATE EXTENSION IF NOT EXISTS vector; -- pgvector
 CREATE EXTENSION IF NOT EXISTS citext; -- case insensitive text type for users.email
                                        -- a@domain.com === A@domain.com
 
@@ -52,11 +53,14 @@ CREATE TABLE ingredients (
   category_id INT NOT NULL REFERENCES ingredient_categories(id),
   unit_type ingredient_unit_type NOT NULL DEFAULT 'mass',
   unit_weight_grams NUMERIC(6,2),
-  kcal_per_100g NUMERIC(6,2) NOT NULL CHECK (kcal_per_100g >= 0),
+  kcal_per_100g NUMERIC(6,2) NOT NULL CHECK (kcal_per_100g BETWEEN 0 AND 900),
   protein_per_100g NUMERIC(6,2) NOT NULL CHECK (protein_per_100g >= 0),
   carbs_per_100g NUMERIC(6,2) NOT NULL CHECK (carbs_per_100g >= 0),
   fat_per_100g NUMERIC(6,2) NOT NULL CHECK (fat_per_100g >= 0),
   is_active BOOLEAN NOT NULL DEFAULT TRUE,
+  macro_vector vector(3) GENERATED ALWAYS AS (
+    ARRAY[protein_per_100g, carbs_per_100g, fat_per_100g]::real[]::vector(3)
+  ) STORED,
 
   CHECK (protein_per_100g + carbs_per_100g + fat_per_100g <= 100)
   CONSTRAINT check_unit_weight CHECK (
@@ -113,8 +117,10 @@ CREATE TABLE slot_options (
     ingredient_id INT NOT NULL REFERENCES ingredients(id) ON DELETE RESTRICT,
     default_grams NUMERIC(7,2) NOT NULL CHECK (default_grams > 0),
     is_default BOOLEAN NOT NULL DEFAULT FALSE,
-    min_multiplier NUMERIC(4,2) NOT NULL CHECK (min_multiplier > 0),
-    max_multiplier NUMERIC(4,2) NOT NULL,
+    min_multiplier NUMERIC(4,2) NOT NULL DEFAULT 0.6 CHECK (min_multiplier > 0),
+    max_multiplier NUMERIC(4,2) NOT NULL DEFAULT 2.0,
+    min_grams NUMERIC GENERATED ALWAYS AS (default_grams * min_multiplier) STORED,
+    max_grams NUMERIC GENERATED ALWAYS AS (default_grams * max_multiplier) STORED,
 
     UNIQUE (slot_id, ingredient_id),
     CHECK (min_multiplier <= 1 AND max_multiplier >= 1)
