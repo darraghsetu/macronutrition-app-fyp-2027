@@ -2,9 +2,6 @@ CREATE EXTENSION IF NOT EXISTS vector; -- pgvector
 CREATE EXTENSION IF NOT EXISTS citext; -- case insensitive text type for users.email
                                        -- a@domain.com === A@domain.com
 
--- TODO:
--- Add views?
-
 -- User tables
 
 CREATE TABLE users (
@@ -127,6 +124,24 @@ CREATE TABLE slot_options (
 );
 CREATE INDEX ON slot_options(ingredient_id);
 
+--  View must be refreshed when new ingredients/recipes are added:
+--  REFRESH MATERIALIZED VIEW CONCURRENTLY recipe_base_macros;
+CREATE MATERIALIZED VIEW recipe_base_macros AS
+SELECT t.*, ARRAY[t.protein, t.carbs, t.fat]::real[]::vector(3) AS macro_vector
+FROM (
+    SELECT r.id AS recipe_id,
+    COALESCE(SUM(so.default_grams / 100 * i.kcal_per_100g), 0)::numeric(8,2) AS kcal
+    COALESCE(SUM(so.default_grams / 100 * i.protein_per_100g), 0)::numeric(8,2) AS protein,
+    COALESCE(SUM(so.default_grams / 100 * i.carbs_per_100g), 0)::numeric(8,2) AS carbs,
+    COALESCE(SUM(so.default_grams / 100 * i.fat_per_100g), 0)::numeric(8,2) AS fat,
+    FROM recipes r
+    LEFT JOIN recipe_slots rs ON rs.recipe_id = r.id
+    LEFT JOIN slot_options so ON so.slot_id = rs.id AND so.is_default
+    LEFT JOIN ingredients  i  ON i.id = so.ingredient_id
+    GROUP BY r.id
+) AS t;
+CREATE UNIQUE INDEX ON recipe_base_macros(recipe_id);
+
 -- Solver output tables
 
 CREATE TABLE user_meal_plans (
@@ -162,3 +177,12 @@ CREATE TABLE meal_plan_item_ingredients (
     UNIQUE (meal_plan_item_id, slot_option_id)
 );
 CREATE INDEX ON meal_plan_item_ingredients(slot_option_id);
+
+CREATE VIEW meal_plan_totals AS
+SELECT meal_plan_id,
+       SUM(final_calories) AS total_calories,
+       SUM(final_protein) AS total_protein,
+       SUM(final_carbs) AS total_carbs,
+       SUM(final_fat) AS total_fat
+FROM meal_plan_items
+GROUP BY meal_plan_id;
