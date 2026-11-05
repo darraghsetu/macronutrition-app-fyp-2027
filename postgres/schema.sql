@@ -1,23 +1,25 @@
+CREATE EXTENSION IF NOT EXISTS citext; -- case insensitive text type for users.email
+                                       -- a@domain.com === A@domain.com
+
 -- TODO:
--- Add pgvector vectors 
 -- Add views?
 
 -- User tables
 
 CREATE TABLE users (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  email TEXT UNIQUE NOT NULL,
+  email CITEXT UNIQUE NOT NULL,
   password_hash TEXT NOT NULL,
-  created_at TIMESTAMP NOT NULL DEFAULT now(),
-  updated_at TIMESTAMP NOT NULL DEFAULT now()
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
 CREATE TABLE user_goals (
   user_id INT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
-  daily_calories NUMERIC NOT NULL CHECK (daily_calories >= 0),
-  daily_protein NUMERIC NOT NULL CHECK (daily_protein >= 0),
-  daily_carbs NUMERIC NOT NULL CHECK (daily_carbs >= 0),
-  daily_fat NUMERIC NOT NULL CHECK (daily_fat >= 0)
+  daily_calories NUMERIC(7,2) NOT NULL CHECK (daily_calories >= 0),
+  daily_protein NUMERIC(6,2) NOT NULL CHECK (daily_protein >= 0),
+  daily_carbs NUMERIC(6,2) NOT NULL CHECK (daily_carbs >= 0),
+  daily_fat NUMERIC(6,2) NOT NULL CHECK (daily_fat >= 0)
 );
 
 CREATE TABLE dietary_restrictions (
@@ -39,17 +41,29 @@ CREATE TABLE ingredient_categories (
   name VARCHAR(50) UNIQUE NOT NULL -- 'protein', 'vegetable', etc.
 );
 
+-- mass = g
+-- volume = ml
+-- unit = integer value e.g. 1 banana
+CREATE TYPE ingredient_unit_type AS ENUM ('mass', 'volume', 'unit');
+
 CREATE TABLE ingredients (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   name VARCHAR(255) UNIQUE NOT NULL,
   category_id INT NOT NULL REFERENCES ingredient_categories(id),
-  kcal_per_100g NUMERIC NOT NULL CHECK (kcal_per_100g >= 0),
-  protein_per_100g NUMERIC NOT NULL CHECK (protein_per_100g >= 0),
-  carbs_per_100g NUMERIC NOT NULL CHECK (carbs_per_100g >= 0),
-  fat_per_100g NUMERIC NOT NULL CHECK (fat_per_100g >= 0),
+  unit_type ingredient_unit_type NOT NULL DEFAULT 'mass',
+  unit_weight_grams NUMERIC(6,2),
+  kcal_per_100g NUMERIC(6,2) NOT NULL CHECK (kcal_per_100g >= 0),
+  protein_per_100g NUMERIC(6,2) NOT NULL CHECK (protein_per_100g >= 0),
+  carbs_per_100g NUMERIC(6,2) NOT NULL CHECK (carbs_per_100g >= 0),
+  fat_per_100g NUMERIC(6,2) NOT NULL CHECK (fat_per_100g >= 0),
   is_active BOOLEAN NOT NULL DEFAULT TRUE,
 
   CHECK (protein_per_100g + carbs_per_100g + fat_per_100g <= 100)
+  CONSTRAINT check_unit_weight CHECK (
+    (unit_type = 'discrete_unit' AND unit_weight_grams IS NOT NULL AND unit_weight > 0)
+    OR
+    (unit_type != 'discrete_unit' AND unit_weight_grams IS NULL)
+  )
 );
 CREATE INDEX ON ingredients(category_id);
 
@@ -87,7 +101,7 @@ CREATE TABLE recipe_slots (
     recipe_id INT NOT NULL REFERENCES recipes(id) ON DELETE CASCADE,
     slot_name VARCHAR(100) NOT NULL,
     min_selections INT NOT NULL DEFAULT 1 CHECK (min_selections >= 0),
-    max_selections INT NOT NULL DEFAULT 1 CHECK (max_selections >= 0),
+    max_selections INT NOT NULL DEFAULT 1 CHECK (max_selections >= 1),
 
     UNIQUE (recipe_id, slot_name),
     CHECK (max_selections >= min_selections)
@@ -97,10 +111,10 @@ CREATE TABLE slot_options (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     slot_id INT NOT NULL REFERENCES recipe_slots(id) ON DELETE CASCADE,
     ingredient_id INT NOT NULL REFERENCES ingredients(id) ON DELETE RESTRICT,
-    default_grams NUMERIC NOT NULL CHECK (default_grams > 0),
+    default_grams NUMERIC(7,2) NOT NULL CHECK (default_grams > 0),
     is_default BOOLEAN NOT NULL DEFAULT FALSE,
-    min_multiplier NUMERIC NOT NULL CHECK (min_multiplier > 0),
-    max_multiplier NUMERIC NOT NULL,
+    min_multiplier NUMERIC(4,2) NOT NULL CHECK (min_multiplier > 0),
+    max_multiplier NUMERIC(4,2) NOT NULL,
 
     UNIQUE (slot_id, ingredient_id),
     CHECK (min_multiplier <= 1 AND max_multiplier >= 1)
@@ -114,7 +128,7 @@ CREATE TABLE user_meal_plans (
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     plan_date DATE NOT NULL,
     solver_status TEXT,
-    created_at TIMESTAMP NOT NULL DEFAULT now(),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     
     UNIQUE (user_id, plan_date)
 );
@@ -124,10 +138,10 @@ CREATE TABLE meal_plan_items (
     meal_plan_id INT NOT NULL REFERENCES user_meal_plans(id) ON DELETE CASCADE,
     recipe_id INT NOT NULL REFERENCES recipes(id) ON DELETE RESTRICT,
     meal_category_id INT NOT NULL REFERENCES meal_categories(id) ON DELETE RESTRICT,
-    final_calories NUMERIC NOT NULL,
-    final_protein NUMERIC NOT NULL,
-    final_carbs NUMERIC NOT NULL,
-    final_fat NUMERIC NOT NULL,
+    final_calories NUMERIC(8,2) NOT NULL,
+    final_protein NUMERIC(8,2) NOT NULL,
+    final_carbs NUMERIC(8,2) NOT NULL,
+    final_fat NUMERIC(8,2) NOT NULL,
     FOREIGN KEY (recipe_id, meal_category_id) REFERENCES recipe_categories(recipe_id, category_id)
 );
 CREATE INDEX ON meal_plan_items(meal_plan_id);
@@ -137,7 +151,7 @@ CREATE TABLE meal_plan_item_ingredients (
     id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     meal_plan_item_id INT NOT NULL REFERENCES meal_plan_items(id) ON DELETE CASCADE,
     slot_option_id INT NOT NULL REFERENCES slot_options(id) ON DELETE RESTRICT,
-    grams NUMERIC NOT NULL CHECK (grams > 0),
+    grams NUMERIC(7,2) NOT NULL CHECK (grams > 0),
 
     UNIQUE (meal_plan_item_id, slot_option_id)
 );
