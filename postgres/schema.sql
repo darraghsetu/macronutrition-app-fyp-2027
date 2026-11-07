@@ -59,11 +59,11 @@ CREATE TABLE ingredients (
     ARRAY[protein_per_100g, carbs_per_100g, fat_per_100g]::real[]::vector(3)
   ) STORED,
 
-  CHECK (protein_per_100g + carbs_per_100g + fat_per_100g <= 100)
+  CHECK (protein_per_100g + carbs_per_100g + fat_per_100g <= 100),
   CONSTRAINT check_unit_weight CHECK (
-    (unit_type = 'discrete_unit' AND unit_weight_grams IS NOT NULL AND unit_weight > 0)
+    (unit_type = 'unit' AND unit_weight_grams IS NOT NULL AND unit_weight_grams > 0)
     OR
-    (unit_type != 'discrete_unit' AND unit_weight_grams IS NULL)
+    (unit_type != 'unit' AND unit_weight_grams IS NULL)
   )
 );
 CREATE INDEX ON ingredients(category_id);
@@ -130,10 +130,10 @@ CREATE MATERIALIZED VIEW recipe_base_macros AS
 SELECT t.*, ARRAY[t.protein, t.carbs, t.fat]::real[]::vector(3) AS macro_vector
 FROM (
     SELECT r.id AS recipe_id,
-    COALESCE(SUM(so.default_grams / 100 * i.kcal_per_100g), 0)::numeric(8,2) AS kcal
+    COALESCE(SUM(so.default_grams / 100 * i.kcal_per_100g), 0)::numeric(8,2) AS kcal,
     COALESCE(SUM(so.default_grams / 100 * i.protein_per_100g), 0)::numeric(8,2) AS protein,
     COALESCE(SUM(so.default_grams / 100 * i.carbs_per_100g), 0)::numeric(8,2) AS carbs,
-    COALESCE(SUM(so.default_grams / 100 * i.fat_per_100g), 0)::numeric(8,2) AS fat,
+    COALESCE(SUM(so.default_grams / 100 * i.fat_per_100g), 0)::numeric(8,2) AS fat
     FROM recipes r
     LEFT JOIN recipe_slots rs ON rs.recipe_id = r.id
     LEFT JOIN slot_options so ON so.slot_id = rs.id AND so.is_default
