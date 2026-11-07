@@ -50,6 +50,7 @@ CREATE TABLE ingredients (
   name VARCHAR(255) UNIQUE NOT NULL,
   category_id INT NOT NULL REFERENCES ingredient_categories(id),
   package_size NUMERIC(8,2),
+  price_in_eur NUMERIC(6,2),
   unit_type ingredient_unit_type NOT NULL DEFAULT 'mass',
   unit_weight_grams NUMERIC(6,2), -- NULL UNLESS ingredient_unit_type = 'unit'
   kcal_per_100g NUMERIC(6,2) NOT NULL CHECK (kcal_per_100g BETWEEN 0 AND 900),
