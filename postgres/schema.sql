@@ -47,7 +47,7 @@ CREATE TYPE ingredient_unit_type AS ENUM ('mass', 'volume', 'unit');
 CREATE TABLE ingredients (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   brand VARCHAR(100),
-  name VARCHAR(255) UNIQUE NOT NULL,
+  name VARCHAR(255) NOT NULL,
   category_id INT NOT NULL REFERENCES ingredient_categories(id),
   package_size NUMERIC(8,2),
   price_in_eur NUMERIC(6,2),
@@ -63,6 +63,7 @@ CREATE TABLE ingredients (
   ) STORED,
 
   CHECK (protein_per_100g + carbs_per_100g + fat_per_100g <= 100),
+  CONSTRAINT unique_ingredient_combination UNIQUE NULLS NOT DISTINCT (brand, name, package_size),
   CONSTRAINT check_unit_weight CHECK (
     (unit_type = 'unit' AND unit_weight_grams IS NOT NULL AND unit_weight_grams > 0)
     OR
