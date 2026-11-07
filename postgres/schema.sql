@@ -46,10 +46,12 @@ CREATE TYPE ingredient_unit_type AS ENUM ('mass', 'volume', 'unit');
 
 CREATE TABLE ingredients (
   id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  brand VARCHAR(100),
   name VARCHAR(255) UNIQUE NOT NULL,
   category_id INT NOT NULL REFERENCES ingredient_categories(id),
+  package_size NUMERIC(8,2),
   unit_type ingredient_unit_type NOT NULL DEFAULT 'mass',
-  unit_weight_grams NUMERIC(6,2),
+  unit_weight_grams NUMERIC(6,2), -- NULL UNLESS ingredient_unit_type = 'unit'
   kcal_per_100g NUMERIC(6,2) NOT NULL CHECK (kcal_per_100g BETWEEN 0 AND 900),
   protein_per_100g NUMERIC(6,2) NOT NULL CHECK (protein_per_100g >= 0),
   carbs_per_100g NUMERIC(6,2) NOT NULL CHECK (carbs_per_100g >= 0),
