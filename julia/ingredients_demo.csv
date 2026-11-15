@@ -1,0 +1,185 @@
+id,brand,name,category,package_size,price_in_eur,unit_type,unit_weight_grams,kcal_per_100g,protein_per_100g,carbs_per_100g,fat_per_100g
+1,Tesco,Irish Chicken Breast Fillet Portions,Poultry,1171.00,13.49,mass,,106.00,24.00,0.00,1.10
+2,Tesco,Free Range Irish Chicken Breast Fillets,Poultry,680.00,13.49,mass,,106.00,24.00,0.00,1.10
+3,Sicin Sasta,Free Range Irish Chicken Breast Fillets,Poultry,500.00,9.99,mass,,148.00,32.00,0.00,2.20
+4,Tesco,Free Range Irish Chicken Breast Fillets,Poultry,454.00,8.79,mass,,106.00,24.00,0.00,1.10
+5,Sicin Sasta,Farmers Own Chicken Breast Fillets,Poultry,500.00,7.59,mass,,148.00,32.00,0.00,2.20
+6,Tesco Finest,Irish Corn Fed Chicken Breast Fillets,Poultry,375.00,7.50,mass,,117.00,23.00,0.00,2.80
+7,Tesco,Irish Diced Chicken Breast Pieces,Poultry,550.00,6.49,mass,,106.00,24.00,0.00,1.10
+8,Sicin Sasta,Farmers Own Irish Chicken Leg Fillets,Poultry,610.00,6.30,mass,,170.00,22.70,0.00,6.50
+9,Tesco,Irish Chicken Breast Fillets,Poultry,500.00,6.15,mass,,106.00,24.00,0.00,1.10
+10,Tesco,Free Range Irish Chicken Breast Fillets,Poultry,300.00,5.99,mass,,153.00,30.20,0.00,3.60
+11,Tesco Finest,Irish Corn Fed Chicken Breast Mini Fillets,Poultry,300.00,5.89,mass,,102.00,23.20,0.00,1.00
+12,Tesco,Irish Diced Chicken Breast Pieces,Poultry,350.00,4.39,mass,,106.00,24.00,0.00,1.10
+13,Tesco,Irish Chicken Breast Fillets,Poultry,291.00,4.15,mass,,106.00,24.00,0.00,1.10
+14,Green Farm,Cajun Chicken Breast Pieces,Cooked Meats,120.00,4.00,mass,,136.00,27.50,1.50,1.80
+15,Denny,Wafer Thin Chicken Slices,Cooked Meats,200.00,3.50,unit,13.33,162.00,18.90,0.60,9.20
+16,Tesco,Tikka Chicken Breast Pieces,Cooked Meats,240.00,3.50,mass,,117.00,24.30,0.80,1.80
+17,Western Brand,Breaded Chicken Goujons,Poultry,700.00,6.00,mass,,253.00,14.00,16.00,15.00
+18,Moy Park,Breaded Chicken Goujons,Poultry,700.00,6.00,mass,,252.00,13.30,21.20,12.40
+19,Tesco Finest,Wild Garlic Chicken Kiev with Salted Butter,Poultry,385.00,5.49,unit,192.50,252.00,16.30,15.70,13.50
+20,Tesco Finest,Marry Me Chicken Kievs,Poultry,395.00,5.49,unit,197.50,199.00,15.70,13.90,8.70
+21,Tesco,Southern Fried Chicken Thighs and Drumsticks,Poultry,800.00,5.49,mass,,216.00,17.90,8.30,12.20
+22,Moy Park,Creamy Garlic Chicken Kievs,Poultry,520.00,5.45,unit,130.00,215.00,14.50,12.40,11.70
+23,Rosie and Jim,Garlic Chicken Kievs,Poultry,300.00,4.99,unit,150.00,233.00,15.40,9.20,15.00
+24,Rosie and Jim,Breaded Chicken Goujon,Poultry,300.00,4.99,mass,,183.00,16.80,15.50,6.00
+25,Rosie and Jim,Southern Fried Chicken Fillets,Poultry,280.00,4.99,unit,140.00,175.00,17.40,10.00,7.30
+26,Tesco,Breaded Chicken Tenders,Poultry,320.00,4.99,mass,,218.00,18.10,15.90,8.70
+27,Rosie and Jim,Southern Fried Chicken Goujons,Poultry,300.00,4.99,mass,,186.00,17.30,16.70,5.50
+28,Western Brand,Tempura Chicken Nuggets,Poultry,420.00,4.19,mass,,259.00,10.10,13.50,17.90
+29,Moy Park,Southern Fried Chicken Goujons,Poultry,400.00,4.00,mass,,210.00,15.20,12.50,10.70
+30,Moy Park,Crispy Breaded Chicken Nuggets,Poultry,400.00,4.00,mass,,257.00,13.60,23.00,11.90
+31,Western Brand,Breaded Chicken Burgers,Poultry,454.00,4.00,unit,113.50,266.00,11.60,14.20,17.90
+32,Tesco,Breaded Chicken Goujons,Poultry,540.00,4.00,mass,,255.00,13.10,19.30,13.60
+33,Moy Park,Garlic Butter Chicken Kievs,Poultry,260.00,3.99,unit,130.00,255.00,13.20,12.40,16.80
+34,Tesco,Breaded Chicken Tenders,Poultry,305.00,3.49,mass,,218.00,18.10,15.90,8.70
+35,Tesco,Southern Fried Breaded Chicken Steaks,Poultry,505.00,3.29,unit,126.25,195.00,14.00,14.00,8.80
+36,Tesco,Breaded Garlic Chicken Kievs,Poultry,260.00,2.49,unit,130.00,256.00,12.90,11.20,17.40
+37,Tesco,Irish Chicken Boneless Thighs,Poultry,420.00,3.49,mass,,134.00,19.50,0.00,6.20
+38,Tesco,Irish Chicken Boneless Thighs,Poultry,800.00,9.29,mass,,155.00,18.80,0.10,8.80
+39,McCaghey,Turkey Breast Mince,Poultry,600.00,7.50,mass,,106.00,24.40,0.00,0.80
+40,Hogans Farm,Breaded Turkey Breast Steaks,Poultry,300.00,5.49,unit,100.00,246.00,22.00,15.00,11.00
+41,Hogans Farm,Breaded Turkey Tenders,Poultry,300.00,5.49,mass,,246.00,22.00,15.00,11.00
+42,McCaghey,Turkey Breast Mince,Poultry,400.00,4.99,mass,,106.00,24.40,0.00,0.80
+43,McCaghey,Turkey Breast Steaks,Poultry,460.00,4.99,unit,115.00,106.00,24.40,0.00,0.80
+44,McCaghey,Turkey Burgers,Poultry,400.00,4.59,unit,100.00,102.00,17.50,4.60,1.40
+45,McCaghey,Turkey Meatballs,Poultry,400.00,4.59,unit,33.33,102.00,17.50,4.60,1.40
+46,McCaghey,BBQ Turkey Burger,Poultry,260.00,4.49,unit,130.00,175.00,24.00,7.70,5.50
+47,McCaghey,Breaded Turkey Burgers,Poultry,400.00,4.20,unit,200.00,210.00,19.00,16.20,7.80
+48,McCaghey,Turkey Burgers,Poultry,260.00,4.00,unit,130.00,102.00,17.50,4.60,1.40
+49,Divilly Brothers,Roasted Turkey,Cooked Meats,90.00,2.99,unit,18.00,109.00,21.90,2.50,1.20
+50,Tesco,Irish Pork Shoulder Chops,Pork,1050.00,8.00,unit,210.00,212.00,17.30,0.20,15.60
+51,Tesco,Irish Pork Loin Chops,Pork,1040.00,8.00,unit,130.00,186.00,21.40,0.00,11.20
+52,Oakpark,Kansas Style BBQ Rack of Ribs,Pork,600.00,7.00,mass,,226.00,15.00,13.80,12.30
+53,Tesco,Irish Pork Loin Chops,Pork,874.00,6.00,unit,100.00,186.00,21.40,0.00,11.20
+54,Oakpark,Sweet BBQ Pulled Pork Loin,Pork,400.00,5.50,mass,,179.00,17.70,15.60,5.20
+55,Tesco,Irish Basted Pork Chops,Pork,530.00,5.00,unit,100.00,175.00,20.30,0.20,10.30
+56,Tesco,Irish Pork Mince 15% Fat,Pork,800.00,4.50,mass,,183.00,18.90,0.00,12.00
+57,Tesco,Irish Pork Steak,Pork,600.00,3.95,mass,,131.00,21.50,0.00,5.00
+58,Tesco,Irish Boneless Loin Pork Chops,Pork,523.00,3.49,unit,130.75,186.00,21.40,0.00,11.20
+59,Tesco,Irish Lean Pork Mince 5% Fat,Pork,400.00,3.50,mass,,129.00,22.50,0.00,4.30
+60,Tesco,Irish Pork Mince 15% Fat,Pork,400.00,3.00,mass,,183.00,18.90,0.00,12.00
+61,Tesco Finest,Thick Cut Hickory Smoked Dry Cured Irish Rashers,Pork,250.00,2.69,unit,50.00,223.00,19.60,0.30,16.00
+62,Tesco Finest,Unsmoked Dry Cured Irish Rashers,Pork,240.00,2.69,unit,40.00,197.00,20.20,0.20,12.80
+63,Tesco Finest,Unsmoked Dry Cured Streaky Rashers,Pork,240.00,2.69,unit,24.00,247.00,16.80,0.50,19.80
+64,Tesco Finest,Thin Cut Canadian Maple Smoked Dry Cured Streaky Irish Rashers,Pork,240.00,2.69,unit,15.00,264.00,17.60,1.10,21.00
+65,Tesco Finest,Beechwood Smoked Dry Cured Irish Rashers,Pork,240.00,2.69,unit,40.00,215.00,20.10,0.70,14.50
+66,Tesco Finest,Beechwood Smoked Dry Cured Irish Streaky Rashers,Pork,240.00,2.69,unit,24.00,269.00,17.40,0.40,22.00
+67,Oakpark,Bacon Loin Ribs,Pork,500.00,6.99,mass,,225.00,16.00,0.60,18.00
+68,Tesco,Irish Bacon Chops,Pork,800.00,6.50,unit,200.00,193.00,16.90,0.30,13.80
+69,Tesco,Irish Basted Pork Medallions,Pork,400.00,5.00,unit,100.00,108.00,18.60,0.50,3.40
+70,Brady Family,Honey Roast Irish Ham,Cooked Meats,80.00,3.50,unit,13.33,114.00,23.00,0.50,3.20
+71,Tesco,Traditional Thick Cut Irish Ham,Cooked Meats,140.00,3.29,unit,28.00,126.00,25.00,0.60,2.50
+72,Divilly Brothers,Traditional Irish Ham,Cooked Meats,90.00,3.00,unit,18.00,109.00,21.50,0.80,2.20
+73,Oakpark,Unsmoked Lean Bacon Medallions,Pork,170.00,2.99,unit,28.33,135.00,20.20,0.90,5.50
+74,Oakpark,Smoked Lean Bacon Medallions,Pork,170.00,2.99,unit,28.33,144.00,21.00,1.10,6.20
+75,Tesco,Unsmoked Irish Bacon Medallions,Pork,200.00,1.79,unit,28.57,120.00,20.60,0.20,4.10
+76,Tesco,Smoked Irish Bacon Medallions,Pork,200.00,1.79,unit,28.57,120.00,21.10,2.20,3.00
+77,Tesco Finest,Irish Angus Fillet Steaks,Beef,400.00,17.49,unit,200.00,155.00,20.90,0.00,7.90
+78,Bright Meat Company,Irish Beef Striploin Steaks,Beef,600.00,16.49,unit,150.00,201.00,21.60,0.00,12.70
+79,Bright Meat Company,Irish Beef Sirloin Steaks,Beef,720.00,15.49,unit,180.00,174.00,20.70,0.00,10.10
+80,Tesco Finest,Irish Angus Ribeye Steaks,Beef,454.00,14.79,unit,227.00,253.00,18.80,0.00,19.80
+81,Irish Country,Irish Beef Striploin Steaks,Beef,600.00,14.00,unit,150.00,201.00,21.60,0.00,12.70
+82,Bright Meat Company,Thick Cut Irish Beef Fillet Steak,Beef,280.00,13.99,unit,280.00,155.00,20.90,0.00,7.90
+83,Tesco Finest,Irish Angus Striploin Steak,Beef,454.00,13.99,unit,227.00,201.00,21.60,0.00,12.70
+84,Tesco Finest,Irish Angus Striploin Steak,Beef,284.00,13.49,unit,284.00,201.00,21.60,0.00,12.70
+85,Tesco,Irish Ribeye Steak,Beef,454.00,12.50,unit,227.00,253.00,18.80,0.00,19.80
+86,Tesco,Irish Beef Fillet Steak,Beef,330.00,13.00,unit,165.00,115.00,20.90,0.00,7.90
+87,Tesco,Irish Beef Steak Mince 10% Fat,Beef,1000.00,11.50,mass,,168.00,20.40,0.00,9.70
+88,Tesco,Irish Beef Steak Mince 3% Fat,Beef,750.00,11.25,mass,,113.00,21.80,0.40,2.70
+89,Tesco,Irish Diced Beef,Beef,807.00,11.00,mass,,114.00,22.10,0.00,2.80
+90,Bright Meat Company,Thick Cut Irish Beef Ribeye Steak,Beef,280.00,10.99,unit,280.00,253.00,18.80,0.00,19.80
+91,Tesco,Irish Beef Steak Mince 5% Fat,Beef,750.00,10.50,mass,,127.00,21.80,0.40,4.20
+92,Tesco Finest,Irish Angus Sirloin Steaks,Beef,454.00,10.79,unit,227.00,174.00,20.70,0.00,10.10
+93,Irish Country,Irish Beef Rib Eye Steaks,Beef,400.00,10.49,unit,200.00,253.00,18.80,0.00,19.80
+94,Irish Country,Irish Beef Striploin Steaks,Beef,400.00,9.99,unit,200.00,201.00,21.60,0.00,12.70
+95,Tesco,Irish Sirloin Steak,Beef,513.00,9.50,unit,256.50,174.00,20.70,0.00,10.10
+96,Irish Country,Irish Lean Beef Steak Mince 5% Fat,Beef,800.00,8.50,mass,,133.00,20.80,1.50,4.80
+97,Tesco,Irish Diced Stewing Beef,Beef,600.00,8.50,mass,,135.00,20.30,0.00,6.00
+98,Irish Country,Irish Beef Steak Mince 10% Fat,Beef,800.00,8.00,mass,,168.00,20.40,0.00,9.70
+99,Tesco,Irish Beef Steak Mince 10% Fat,Beef,750.00,8.00,mass,,168.00,20.40,0.00,9.70
+100,Irish Country,Irish Beef Sirloin Steak,Beef,454.00,7.93,unit,227.00,171.00,20.30,0.00,10.00
+101,Tesco,Sandwich Steak,Beef,510.00,7.50,unit,102.00,117.00,22.30,0.00,3.00
+102,Tesco Finest,Irish Angus Chuck and Brisket Burger,Beef,454.00,7.49,unit,227.00,208.00,24.90,2.70,10.90
+103,Tesco,Irish Beef Meatballs,Beef,720.00,7.00,unit,30.00,227.00,21.20,3.40,14.20
+104,Tesco,Irish Lean Beef Mince 3% Fat,Beef,450.00,6.75,mass,,113.00,21.80,0.40,2.70
+105,Tesco,Irish Beef Mince 18% Fat,Beef,250.00,3.00,mass,,231.00,19.20,0.00,17.10
+106,Tesco,Irish Diced Beef,Beef,565.00,7.00,mass,,114.00,22.10,0.00,2.80
+107,Tesco,Irish Beef Medallion,Beef,381.00,6.50,unit,190.50,113.00,21.60,1.40,2.30
+108,Tesco,Irish Thin Sliced Beef Steaks,Beef,300.00,6.50,unit,100.00,113.00,21.60,1.40,3.10
+109,Bright Meat Company,Lean Irish Beef Mince 5% Fat,Beef,500.00,6.50,mass,,118.00,21.00,0.40,3.50
+110,Tesco,Irish Beef Mince 18% Fat,Beef,1000.00,6.50,mass,,231.00,19.20,0.00,17.10
+111,Tesco,Irish Lean Beef Steak Mince 5% Fat,Beef,450.00,6.00,mass,,127.00,21.80,0.40,4.20
+112,Tesco,Irish Beef Burgers,Beef,600.00,6.00,unit,100.00,271.00,24.20,2.50,18.10
+113,Tesco Finest,Irish Angus Beef Steak Mince 10% Fat,Beef,450.00,5.75,mass,,177.00,21.70,0.40,9.90
+172,Tesco,Milled Seeds with Flax and Chia,Nuts and Seeds,175.00,2.80,mass,,547.00,23.00,2.40,45.00
+114,Bright Meat Company,Salt and Cracked Black Pepper Irish Beef Quarter Pounders,Beef,454.00,5.50,unit,113.50,226.00,20.70,2.80,14.60
+115,Bright Meat Company,Irish Beef Medallion Steaks,Beef,280.00,5.50,unit,140.00,110.00,23.00,0.20,1.80
+116,Tesco,Irish Beef Steak Mince,Beef,450.00,5.50,mass,,168.00,20.40,0.00,9.70
+117,Irish Country,Irish Lean Beef Steak Mince 5% Fat,Beef,454.00,5.30,mass,,133.00,20.80,1.50,4.80
+118,Tesco Finest,Irish Angus 6oz Beef Burgers,Beef,340.00,5.00,unit,170.00,247.00,23.10,2.30,15.90
+119,Irish Country,Irish Beef Minute Steak,Beef,360.00,5.15,unit,120.00,192.00,23.00,0.00,4.30
+120,Irish Country,Irish Round Steak Beef Mince 10% Fat,Beef,500.00,4.95,mass,,168.00,20.40,0.00,9.70
+121,Tesco Finest,Irish Angus 5oz Ribsteak Beef Burgers,Beef,284.00,5.00,unit,142.00,213.00,23.20,5.10,11.00
+122,Irish Country,Irish Beef Mince 18% Fat,Beef,800.00,4.75,mass,,231.00,19.20,0.00,7.40
+123,Tesco,Quarter Pounder Irish Beef Burgers,Beef,454.00,4.50,unit,113.50,271.00,24.20,2.50,18.10
+124,Tesco,50% Reduced Fat Irish Beef Burgers,Beef,454.00,4.50,unit,113.50,169.00,24.80,3.90,5.90
+125,Irish Country,Irish Beef Sirloin Steak,Beef,200.00,4.00,unit,200.00,171.00,20.30,0.00,10.00
+126,Irish Country,Irish Round Steak Beef Mince 10% Fat,Beef,350.00,4.00,mass,,168.00,20.40,0.00,9.70
+127,Tesco,Irish Lean Beef Steak Mince 5% Fat,Beef,250.00,3.75,mass,,127.00,21.80,0.40,4.20
+128,Irish Country,Irish Beef Meatballs,Beef,300.00,3.50,unit,25.00,239.00,16.70,3.80,17.40
+129,Tesco,Irish Reduced Fat Beef Meatballs,Beef,349.00,3.50,unit,29.08,184.00,24.90,5.60,6.80
+130,Irish Country,Irish Beef Reduced Fat Quarter Pounders,Beef,227.00,3.50,unit,113.50,160.00,16.40,4.40,8.50
+131,Tesco,Irish Round Beef Steak Mince 10% Fat,Beef,250.00,3.25,mass,,168.00,20.40,0.00,9.70
+132,Tesco,Low Fat Irish Beef Burgers,Beef,227.00,3.00,unit,113.50,137.00,23.90,4.70,2.30
+133,Tesco,Irish Boneless Lamb Shoulder Chops,Lamb,801.00,14.00,mass,,239.00,16.90,0.00,19.00
+134,Tesco,Irish Lamb Loin Chops,Lamb,582.00,11.00,unit,97.00,277.00,17.60,0.00,23.00
+135,Irish Country,Irish Lamb Loin Chops,Lamb,370.00,8.65,unit,92.50,277.00,17.60,0.00,23.00
+136,Tesco,Irish Boneless Lamb Shoulder Chops,Lamb,401.00,8.00,mass,,239.00,16.90,0.00,19.00
+137,Tesco,Irish Lamb Leg Steaks,Lamb,313.00,7.50,unit,156.50,155.00,19.80,0.00,8.40
+138,Tesco,Irish Lamb Gigot Chops,Lamb,500.00,7.50,mass,,235.00,17.60,0.00,18.30
+139,Tesco,Irish Diced Lamb,Lamb,263.00,5.00,mass,,166.00,18.60,0.00,10.20
+140,Tesco,Irish Lamb Rump Steaks,Lamb,220.00,5.00,unit,110.00,187.00,19.00,0.00,12.30
+141,Tesco Finest,Irish Pork Sausages,Pork,750.00,4.79,unit,75.00,290.00,13.70,4.80,23.80
+142,Ballyfree,Turkey Rashers,Poultry,150.00,3.75,unit,25.00,114.00,20.60,1.20,2.90
+143,Tesco,Garlic and Herb Irish Pork Sausages,Pork,500.00,4.00,unit,62.50,290.00,14.80,9.70,21.10
+144,Tesco,Gluten Free Irish Pork Sausages,Pork,440.00,4.50,unit,55.00,314.00,11.10,5.20,27.30
+145,Mallons,Low Fat Chicken Sausages,Poultry,240.00,3.99,unit,40.00,105.00,17.00,3.40,2.65
+146,Denny,Skinless Pork Sausages,Pork,454.00,3.99,unit,28.37,252.00,11.00,11.00,18.00
+147,Denny,Gold Medal Sausages,Pork,454.00,3.89,unit,28.37,296.00,11.00,11.30,23.00
+148,Clonakilty,Irish Pork Sausages,Pork,454.00,3.90,unit,28.37,327.00,8.70,10.80,27.40
+149,Clonakilty,Gluten Free Irish Pork Sausages,Pork,227.00,2.40,unit,28.37,314.00,11.10,5.20,27.30
+150,Oakpark,Unsmoked Turkey Breast Rashers,Poultry,150.00,3.49,unit,25.00,97.00,21.00,0.50,1.00
+151,Tesco,Cashew Nuts,Nuts and Seeds,500.00,6.00,mass,,586.00,17.70,18.10,48.20
+152,Tesco,Blueberries,Fruit,500.00,5.99,mass,,68.00,0.70,14.50,0.30
+153,Tesco,Strawberries,Fruit,400.00,4.49,mass,,29.00,0.80,6.00,0.10
+154,Tesco Finest,Raspberries,Fruit,150.00,3.50,mass,,32.00,1.40,4.60,0.30
+155,Linwoods,Organic Sprouted Sunflower Seeds,Nuts and Seeds,125.00,4.00,mass,,669.00,20.00,0.80,62.00
+156,Tesco,Cherries Punnet,Fruit,200.00,3.29,mass,,52.00,0.90,11.50,0.10
+157,Tesco,Rocha Pear Punnet,Fruit,750.00,3.15,mass,,47.00,0.30,10.00,0.10
+158,Sowans,Organic Whole Almonds,Nuts and Seeds,100.00,3.00,mass,,579.00,21.00,22.00,50.00
+159,Sowans,Organic Mixed Nuts,Nuts and Seeds,100.00,3.00,mass,,660.00,15.10,5.10,64.50
+160,Tesco,Red Seedless Grapes,Fruit,500.00,2.99,mass,,73.00,0.60,17.00,0.10
+161,Tesco,Seedless Grape Selection,Fruit,500.00,2.99,mass,,73.00,0.60,17.00,0.10
+162,Simplyfruit,Mango Chunks,Fruit,240.00,2.99,mass,,52.00,0.70,10.40,0.60
+163,Simplyfruit,Pineapple Chunks,Fruit,240.00,2.99,mass,,42.00,0.50,9.00,0.10
+164,Tesco,Black Seedless Grapes,Fruit,500.00,2.99,mass,,73.00,0.60,17.00,0.10
+165,Tesco,Green Seedless Grapes,Fruit,500.00,2.99,mass,,67.00,0.70,15.20,0.20
+166,Simplyfruit,Melon and Grapes,Fruit,240.00,2.99,mass,,35.00,0.50,7.30,0.10
+167,Simplyfruit,Pink Lady Apple Slices,Fruit,350.00,2.99,mass,,55.00,0.60,11.50,0.50
+168,Sowans,Pecan Nuts,Nuts and Seeds,100.00,2.90,mass,,689.00,9.00,6.00,70.00
+169,Merchant Gourmet,Whole Chestnuts,Nuts and Seeds,180.00,2.89,mass,,170.00,3.80,33.00,1.30
+170,Tesco,Strawberries,Fruit,227.00,2.89,mass,,29.00,0.80,6.00,0.10
+171,Tesco,Milled Flax Seed Mix,Nuts and Seeds,175.00,2.80,mass,,514.00,21.00,2.00,40.00
+173,Tesco Finest,Blueberries,Fruit,125.00,2.59,mass,,69.00,0.70,14.50,0.30
+174,Tesco,Soft Pitted Dates,Fruit,250.00,2.50,mass,,304.00,3.30,68.00,0.20
+175,Tesco,Soft Apricots,Fruit,250.00,2.50,mass,,210.00,2.50,45.20,0.60
+176,Tesco,Cashew Nuts,Nuts and Seeds,200.00,2.50,mass,,642.00,20.50,18.80,50.90
+177,Tesco,Mixed Raisins,Nuts and Seeds,200.00,2.50,mass,,329.00,3.00,70.30,3.20
+178,Tesco,Almonds,Nuts and Seeds,200.00,2.50,mass,,635.00,21.10,6.90,55.80
+179,Sowans,Brazil Nuts,Nuts and Seeds,100.00,2.50,mass,,683.00,14.00,3.00,68.00
+180,Tesco,Walnuts,Nuts and Seeds,200.00,2.50,mass,,701.00,14.70,3.30,68.50
+181,Tesco,Brazil Nuts,Nuts and Seeds,200.00,2.50,mass,,696.00,14.30,3.10,68.20
+182,Tesco,Mixed Nuts,Nuts and Seeds,200.00,2.50,mass,,616.00,21.60,6.50,53.50
+183,Tesco,Prunes,Fruit,250.00,2.50,mass,,243.00,2.10,54.20,0.50
+184,Simplyfruit,Melon Medley,Fruit,300.00,2.29,mass,,20.00,0.40,4.40,0.10
