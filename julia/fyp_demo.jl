@@ -3,6 +3,7 @@ using JuMP
 using Gurobi
 using CSV
 using DataFrames
+using Printf
 
 ### Import ingredient data ###
 
@@ -13,11 +14,11 @@ println("Loaded $(I) ingredients")
 
 ### User Goals ###
 
-print("Enter target daily calories (kcal): ")
+print("Please enter target daily calories in kcal: ")
 input_kcal = readline()
 target_kcal = isempty(input_kcal) ? 2000.0 : parse(Float64, input_kcal)
 
-print("Enter target daily protein in grams: ")
+print("Please enter target daily protein in grams: ")
 input_protein = readline()
 target_protein = isempty(input_protein) ? 140.0 : parse(Float64, input_protein)
 
@@ -31,14 +32,21 @@ D = length(days)
 
 ### Modelling ###
 
+verbose = "-q" in ARGS ? 0 : 1
+gurobi_env = Gurobi.Env(Dict{String,Any}("LogToConsole" => verbose))
+
 #model = Model(HiGHS.Optimizer)
-model = Model(Gurobi.Optimizer)
+model = Model(() -> Gurobi.Optimizer(gurobi_env))
 
 ## Solver Configuration
 set_optimizer_attribute(model, "MIPGap", 0.02) # Accept 2% optimality gap
 #set_optimizer_attribute(model, "threads", 4)
-set_optimizer_attribute(model, "time_limit", 3.0)
-set_optimizer_attribute(model, "Presolve", 2)      # Ensure deep presolve is active
+set_optimizer_attribute(model, "Presolve", 2)
+#set_optimizer_attribute(model, "OutputFlag", verbose)
+
+if "-t" in ARGS
+    set_optimizer_attribute(model, "time_limit", 3.0)
+end
 
 ## Decision Variables
 
@@ -136,13 +144,13 @@ end
 optimize!(model)
 status = termination_status(model)
 
-println("### Optimisation results ###")
+println("\n### Optimisation results ###")
 println("Termination Status: $(status)")
 
 if status == MOI.OPTIMAL || status == MOI.TIME_LIMIT
     println("Objective Value: $(objective_value(model))")
-    println("Week's total cost: €$(round(JuMP.value(total_cost), digits=2))")
-    println("Week's total food waste: €$(round(JuMP.value(total_waste_money), digits=2))")
+    println("Week's total cost: €$(Printf.@sprintf("%.2f", JuMP.value(total_cost)))")
+    println("Week's total food waste: €$(Printf.@sprintf("%.2f", JuMP.value(total_waste_money)))")
 
     weekly_protein = sum(JuMP.value(ingredients.protein_per_100g[i] / 100.0 * x[i, d]) for i in 1:I, d in 1:D)
     weekly_kcal = sum(JuMP.value(ingredients.kcal_per_100g[i] / 100.0 * x[i, d]) for i in 1:I, d in 1:D)
@@ -155,7 +163,8 @@ if status == MOI.OPTIMAL || status == MOI.TIME_LIMIT
     println("\n### Daily Ingredient List ###")
 
     for d in 1:D
-        println("\n Day $(days[d])")
+        println("\n$(days[d])")
+        println("---")
 
         day_prot = sum(JuMP.value(ingredients.protein_per_100g[i] / 100.0 * x[i, d]) for i in 1:I)
         day_kcal = sum(JuMP.value(ingredients.kcal_per_100g[i] / 100.0 * x[i, d]) for i in 1:I)
@@ -163,6 +172,7 @@ if status == MOI.OPTIMAL || status == MOI.TIME_LIMIT
         println("Achieved:")
         println("$(round(day_prot, digits=1))g protein")
         println("$(round(day_kcal, digits=1)) kcal")
+        println("---")
 
         for i in 1:I
             bought_packs = JuMP.value(y[i, d])
@@ -172,15 +182,16 @@ if status == MOI.OPTIMAL || status == MOI.TIME_LIMIT
                 println("$(ingredients.brand[i]) $(ingredients.name[i])")
 
                 if bought_packs > 0.001
-                    println("Bought: $(Int(round(bought_packs))) pack(s) [$(Int(round(bought_packs * ingredients.package_size[i])))g]")
+                    println("Bought: $(Int(round(bought_packs))) pack(s) ($(Int(round(bought_packs * ingredients.package_size[i])))g)")
                 end
 
                 println("Consumed: $(round(consumed_grams, digits=1))g")
+                println("---")
             end
         end
     end
 
-    println("Remaining Stock:")
+    println("\nRemaining Stock:")
 
     leftover_items = false
     for i in 1:I
@@ -188,7 +199,7 @@ if status == MOI.OPTIMAL || status == MOI.TIME_LIMIT
         if leftover_g > 0.1
             global leftover_items = true
             value_left = leftover_g * (ingredients.price_in_eur[i] / ingredients.package_size[i])
-            println("$(ingredients.brand[i]) $(ingredients.name[i]): $(round(leftover_g, digits=1))g left (€$(round(value_left, digits=2)))")
+            println("$(ingredients.brand[i]) $(ingredients.name[i]): $(round(leftover_g, digits=1))g left (€$(Printf.@sprintf("%.2f", value_left)))")
         end
     end
 
